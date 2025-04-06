@@ -1,5 +1,6 @@
 defmodule HarezmWeb.Router do
   use HarezmWeb, :router
+  use AshAuthentication.Phoenix.Router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -14,10 +15,34 @@ defmodule HarezmWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :admin do
+    plug :browser
+    plug :require_authenticated
+    plug :ensure_admin
+  end
+
   scope "/", HarezmWeb do
     pipe_through :browser
 
     get "/", PageController, :home
+    get "/contact", ContactController, :show
+  end
+
+  scope "/auth", HarezmWeb do
+    pipe_through :browser
+
+    forward "/", AshAuthentication.Phoenix.Router,
+      register: true,
+      reset_password: true
+  end
+
+  scope "/admin", HarezmWeb do
+    pipe_through :admin
+
+    live "/", AdminLive.Dashboard
+    live "/users", AdminLive.Users
+    live "/services", AdminLive.Services
+    live "/messages", AdminLive.Messages
   end
 
   # Other scopes may use custom stacks.
@@ -38,6 +63,13 @@ defmodule HarezmWeb.Router do
       pipe_through :browser
 
       live_dashboard "/dashboard", metrics: HarezmWeb.Telemetry
+    end
+  end
+
+  defp ensure_admin(conn, _opts) do
+    case conn.assigns.current_user do
+      %{role: :admin} -> conn
+      _ -> conn |> redirect(to: "/") |> halt()
     end
   end
 end

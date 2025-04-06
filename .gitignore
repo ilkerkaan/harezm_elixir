@@ -24,6 +24,7 @@ erl_crash.dump
 
 # Ignore package tarball (built via "mix hex.build").
 harezm-*.tar
+harezm_elixir-*.tar
 
 # Ignore assets that are produced by build tools.
 /priv/static/assets/
@@ -34,4 +35,26 @@ harezm-*.tar
 # In case you use Node.js/npm, you want to ignore these.
 npm-debug.log
 /assets/node_modules/
+node_modules/
 
+# Database files
+*.db
+*.db-*
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Keep .cursor folder for project configuration
+# .cursor/

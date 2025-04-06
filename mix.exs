@@ -55,7 +55,14 @@ defmodule Harezm.MixProject do
       {:gettext, "~> 0.26"},
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
-      {:bandit, "~> 1.5"}
+      {:bandit, "~> 1.5"},
+      # Ash Framework and related packages
+      {:ash, "~> 2.19"},
+      {:ash_phoenix, "~> 1.3"},
+      {:ash_postgres, "~> 1.3"},
+      {:ash_authentication, "~> 3.12"},
+      {:ash_authentication_phoenix, "~> 1.9"},
+      {:bcrypt_elixir, "~> 3.0"}
     ]
   end
 

@@ -9,7 +9,8 @@ import Config
 
 config :harezm,
   ecto_repos: [Harezm.Repo],
-  generators: [timestamp_type: :utc_datetime]
+  ash_apis: [Harezm.Admin],
+  token_signing_secret: System.get_env("TOKEN_SIGNING_SECRET", "your-secret-key-base")
 
 # Configures the endpoint
 config :harezm, HarezmWeb.Endpoint,
@@ -20,7 +21,7 @@ config :harezm, HarezmWeb.Endpoint,
     layout: false
   ],
   pubsub_server: Harezm.PubSub,
-  live_view: [signing_salt: "uFf17b+f"]
+  live_view: [signing_salt: "Hs+Hs+Hs"]
 
 # Configure esbuild (the version is required)
 config :esbuild,
@@ -34,7 +35,7 @@ config :esbuild,
 
 # Configure tailwind (the version is required)
 config :tailwind,
-  version: "3.4.3",
+  version: "3.4.0",
   harezm: [
     args: ~w(
       --config=tailwind.config.js
@@ -51,6 +52,16 @@ config :logger, :console,
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
+
+# Configure Ash
+config :ash, :use_all_identities_in_manage_relationship?, false
+
+config :ash_authentication,
+  user_identity_field: :email,
+  password_reset: [
+    sender: {"Harezm", "noreply@harezm.com"},
+    base_url: "http://localhost:4000/auth/password-reset"
+  ]
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
