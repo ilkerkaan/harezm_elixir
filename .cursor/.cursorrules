@@ -1,0 +1,72 @@
+# Cursor Rules for Harezm Elixir Project
+
+# Language Settings
+language = "elixir"
+framework = "phoenix"
+elixir_version = "1.15"
+erlang_version = "26.0"
+
+# Formatting Rules
+line_length = 120
+elixir_formatter = true
+max_blank_lines = 1
+spaces_around_operators = true
+
+# Project Structure
+src_dir = "lib"
+test_dir = "test"
+assets_dir = "assets"
+config_dir = "config"
+priv_dir = "priv"
+
+# Dependencies Management
+mix_env = "dev"
+use_latest_stable = true
+auto_install_deps = true
+
+# Git Settings
+git_ignore_patterns = [
+  "_build/",
+  ".elixir_ls/",
+  "deps/",
+  "*.ez",
+  "npm-debug.log",
+  "assets/node_modules/",
+  "priv/static/",
+  ".env",
+  ".env.*",
+  "*.secret.exs"
+]
+
+# Editor Settings
+tab_size = 2
+insert_final_newline = true
+trim_trailing_whitespace = true
+end_of_line = "lf"
+charset = "utf-8"
+
+# Custom Rules
+preferred_quotes = "double"
+prefer_pipe_operator = true
+align_pattern_match_clauses = true
+
+# LiveView Settings
+live_reload_patterns = [
+  "lib/**/*.ex",
+  "lib/**/*.heex",
+  "assets/**/*.{js,css}"
+]
+
+# Testing Rules
+test_pattern = "*_test.exs"
+test_coverage_threshold = 80
+
+# Documentation Rules
+doc_format = "markdown"
+require_doc_for_modules = true
+require_doc_for_functions = true
+
+# Security Rules
+require_ssl_in_prod = true
+check_deps_security = true
+enforce_strong_passwords = true 
